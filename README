@@ -1,0 +1,19 @@
+The timeline project is a ruby script to be used as a plug-in for Google Sketch.
+
+References:
+   * http://dl.google.com/sketchup/gsu6/GoogleSketchUpMEN.dmg
+   * http://sketchup.google.com/download/rubyscripts.html
+
+Today being the occasion of my 50th birthday, and my practice being to update a timeline covering my life to date on this day every decade or so, I decided to write a script to do this rather than use some arbitrary graphics program (which never seem to hang around for 10 years anyway). I anticipate exporting the output as a tiff and jpeg, as well as saving the object definitions as a Google .kmz file. Hopefully that format will live on till my 60th.
+
+In any case the data will be encoded in ruby and I'll have had fun.
+
+Steps:
+  1) Script will install a menu item to call the drawing routines.
+  2) Methods will be defined for drawing axes, locations, schools, jobs, etc.
+  3) Drawing methods will be read from a file and executed.
+
+Possibilities (time permitting):
+  a) Add object creation from the Draw menu.
+  b) Editing of drawing items from a contextual menu
+
