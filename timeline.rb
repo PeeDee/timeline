@@ -17,23 +17,13 @@ class TimeLine
 
   attr_accessor :name, :birth_place, :birth_date, :locations, :schools, :jobs, :events
 
-  def initialize() # may be completely redundant, because yaml creates and initializes
-    @name = "Your Other Name Here"
-    @birth_place = "Other Birth Place"
-    @birth_date = Date.new(2000, 1, 1)
-    @locations = [] # not initialized as empty array from YAML.load
-    @schools = []
-    @jobs = []
-    @events = []
-  end
-  
   def to_s
     "Timeline for: #{@name}, born: #{@birth_date.to_s} in #{@birth_place}" << 
       "\n" << @locations.to_s << @schools.to_s # << @jobs.to_s << @events.to_s
   end
   
-  def to_yaml_file
-    File.open(@datafile, "w") {|f| YAML.dump(self, f)}
+  def to_yaml_file(filename = "timeline.yaml")
+    File.open(filename, "w") {|f| YAML.dump(self, f)}
   end
   
 end
@@ -42,11 +32,6 @@ class TLLocation
 
   attr_accessor :name, :date
   
-  def initialize(name, year, month=1, day=1)
-    @name = name
-    @date = Date.new(year, month, day)
-  end
-
   def to_s
     "  Location: #{@name} from: #{@date.to_s}\n"
   end
@@ -57,12 +42,6 @@ class TLSchool
 
   attr_accessor :name, :date, :terms
   
-  def initialize(name, year, month=9, day=1)
-    @name = name
-    @date = Date.new(year, month, day)
-    @terms = []
-  end
-
   def to_s
     "  School: #{@name} from: #{@date.to_s}\n" << @terms.to_s
   end
@@ -70,13 +49,16 @@ class TLSchool
 end
 
 class TLTerm
-  attr_accessor :name, :start, :end
+  attr_accessor :name, :start, :finish
   
+  def to_s
+    "    Term: #{@name} from: #{@start.to_s} to #{@finish.to_s}\n"
+  end
   
 end
 
 #=============================================================================
-if __FILE__ == $0 # running from command line
+if __FILE__ == $0 # running from command line to test
   tl = YAML.load(File.open("timeline.yaml"))
   puts tl.to_yaml
 end
