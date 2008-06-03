@@ -1,10 +1,9 @@
 # data file for personal timeline
-name("Your Name Here")
-birth("Birth Place", 1958, 6, 3) # year, month, day
-location("City Name", 1962, 6)
-location("Another Town", 1963, 9)
-school("preschool", 1963) # optional month, end year, end month
-location("School Name, City", 1964, 6)
-school("1st", 1964)
-school("2nd", 1965)
-school("3rd", 1966)
+tl = TimeLine.new("Your Name Here", "Birth Place", 1958, 6, 3) # year, month, day
+tl.add_location("City Name", 1962, 6)
+tl.add_location("Another Town", 1963, 9)
+tl.add_school("preschool", 1963) # optional month, end year, end month
+s2 = tl.add_school("School Name, City", 1964, 6)
+s2.add_term("1st", 1964)
+s2.add_term("2nd", 1965)
+s2.add_term("3rd", 1966)

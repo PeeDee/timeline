@@ -17,3 +17,6 @@ Possibilities (time permitting):
   a) Add object creation from the Draw menu.
   b) Editing of drawing items from a contextual menu
 
+Futures:
+  i) Handle intelligent placement to minimize overlap
+  ii) Hotlink place-names to google maps or wikipedia, schools to facebook
