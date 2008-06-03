@@ -6,15 +6,20 @@
 #  http://sketchup.google.com/download/rubyscripts.html
 #  http://code.google.com/apis/sketchup/docs/developers_guide/index.html
 #  http://groups.google.com/group/SketchUp-Plugins-Dev/web/Ruby-classes.html
+
+# Cannot call yaml library from SketchUp
+# Have to work out some other way of loading data...
+# Define Parametric sub-classes for Location, Term, School...
+# Will automatically be added to model when defined?
 #
 #=============================================================================
-
-require 'sketchup.rb' 
-Sketchup.require('/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/yaml') # http://www.yaml.org/
-
+if __FILE__ != $0 # running from command line to test
+  require 'sketchup.rb' 
+  require 'parametric.rb'
+end
 #=============================================================================
 
-class TimeLine
+class TimeLine #< Parametric
 
   attr_accessor :name, :birth_date, :locations, :schools, :jobs, :events
 
@@ -23,13 +28,9 @@ class TimeLine
       "\n" << @locations.to_s << @schools.to_s # << @jobs.to_s << @events.to_s
   end
   
-  def to_yaml_file(filename = "timeline.yaml")
-    File.open(filename, "w") {|f| YAML.dump(self, f)}
-  end
-  
   def draw
     # draw all elements into a 5 x decade coordinate system....
-    Sketchup.active_model.add_note @name, 0.1, 0.1
+    #Sketchup.active_model.add_note @name, 0.1, 0.1
   end
   
 end
@@ -65,22 +66,23 @@ end
 
 #=============================================================================
 if __FILE__ == $0 # running from command line to test
-  tl = YAML.load(File.open("timeline.pd.yaml"))
+  require 'yaml'
+  tl = TimeLine.new("timeline.dat")
   puts tl.to_yaml
-end
+else
 
-#=============================================================================
-#Add a menu to draw timeline into SketchUp (tested)
-if( not $timeline_menu_loaded )
-    plugins_menu = UI.menu("Plugins")
-    tl_menu = plugins_menu.add_submenu("Time Line")
-    tl_menu.add_item("Load File") { tl = YAML.load(File.open("timeline.pd.yaml")) }
-    tl_menu.add_item("Draw") { tl.draw }
-    #dr_menu = tl_menu.add_submenu("Draw")
-    #...
-    #dr_menu.add_item("Location") { puts "Draw Location Item" }
-    #dr_menu.add_item("School") { puts "Draw School Item" }
-    #...
-    $timeline_menu_loaded = true
-end
+  #Add a menu to draw timeline into SketchUp (tested)
+  if( not $timeline_menu_loaded )
+      plugins_menu = UI.menu("Plugins")
+      tl_menu = plugins_menu.add_submenu("Time Line")
+      tl_menu.add_item("Load File") { tl = TimeLine.new("timeline.dat") }
+      tl_menu.add_item("Draw") { tl.draw }
+      #dr_menu = tl_menu.add_submenu("Draw")
+      #...
+      #dr_menu.add_item("Location") { puts "Draw Location Item" }
+      #dr_menu.add_item("School") { puts "Draw School Item" }
+      #...
+      $timeline_menu_loaded = true
+  end
 
+end

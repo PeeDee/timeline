@@ -10,8 +10,8 @@ In any case the data will be encoded in ruby and I'll have had fun.
 
 Steps:
   1) Script will install a menu item to call the drawing routines.
-  2) Methods will be defined for drawing axes, locations, schools, jobs, etc.
-  3) Drawing methods will be read from a file and executed.
+  2) Drawing methods will be read from a file and executed.
+  3) Methods will be defined for drawing axes, locations, schools, jobs, etc.
 
 Possibilities (time permitting):
   a) Add object creation from the Draw menu.
@@ -20,3 +20,10 @@ Possibilities (time permitting):
 Futures:
   i) Handle intelligent placement to minimize overlap
   ii) Hotlink place-names to google maps or wikipedia, schools to facebook
+  iii) Read in biographical data from Linked-In, Facebook etc.
+  
+*** Work Suspended ***
+
+Turns out you cannot access the Ruby standard libraries (like yaml) from SketchUp which sort of defeats the purpose of using Ruby. You can include any arbitrary file using a full path require in the source, but if it requires any other file you're screwed. In the absence of a way to set the Ruby environment with SketchUp to add the site_path to ruby the whole concept is a non-starter.
+
+Perhaps in time I'll revisit using some of the ruby graphic libraries to write directly to a web-page...
