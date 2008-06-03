@@ -1,0 +1,10 @@
+# data file for personal timeline
+name("Your Name Here")
+birth("Birth Place", 1958, 6, 3) # year, month, day
+location("City Name", 1962, 6)
+location("Another Town", 1963, 9)
+school("preschool", 1963) # optional month, end year, end month
+location("School Name, City", 1964, 6)
+school("1st", 1964)
+school("2nd", 1965)
+school("3rd", 1966)
